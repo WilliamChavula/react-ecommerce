@@ -1,10 +1,11 @@
 import {Component} from "react";
 import { Switch, Route } from "react-router-dom";
+import { getDoc } from "firebase/firestore";
 import HomePage from "./pages/homepage/homepage.component";
 import ShopComponent from "./pages/shop/shop.component";
 import HeaderComponent from "./components/header/header.component";
 import AuthenticationPageComponent from "./pages/authentication-page/authentication-page.component";
-import { auth } from "./firebase/firebase.utils";
+import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
 
 
 import './App.css'
@@ -20,9 +21,23 @@ class App extends Component {
     unSubscribribeFromAuth = null
 
     componentDidMount() {
-        this.unSubscribribeFromAuth = auth.onAuthStateChanged(user => {
-            this.setState({ currentUser: user },
-                () => console.log(this.state.currentUser))
+        this.unSubscribribeFromAuth = auth.onAuthStateChanged(async userAuth => {
+            if (userAuth) {
+                const userRef = await createUserProfileDocument(userAuth)
+
+                // get snapshop by calling firebase's getDoc function
+                const documentSnap = await getDoc(userRef)
+
+                if(documentSnap.exists()) {
+                    this.setState({
+                        currentUser: {
+                            id: documentSnap.id,
+                            ...documentSnap.data()
+                        }
+                    })
+                }
+            }
+            this.setState({ currentUser: userAuth })
         })
     }
 
