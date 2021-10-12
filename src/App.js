@@ -1,6 +1,6 @@
 import {Component} from "react";
 import { Switch, Route } from "react-router-dom";
-import { getDoc } from "firebase/firestore";
+import { onSnapshot } from "firebase/firestore";
 import HomePage from "./pages/homepage/homepage.component";
 import ShopComponent from "./pages/shop/shop.component";
 import HeaderComponent from "./components/header/header.component";
@@ -19,29 +19,28 @@ class App extends Component {
     }
 
     unSubscribribeFromAuth = null
+    unsubscribeOnSnapshot = null
 
     componentDidMount() {
         this.unSubscribribeFromAuth = auth.onAuthStateChanged(async userAuth => {
             if (userAuth) {
                 const userRef = await createUserProfileDocument(userAuth)
 
-                // get snapshop by calling firebase's getDoc function
-                const documentSnap = await getDoc(userRef)
-
-                if(documentSnap.exists()) {
+                this.unsubscribeOnSnapshot = onSnapshot(userRef, (documentSnap) => {
                     this.setState({
                         currentUser: {
                             id: documentSnap.id,
                             ...documentSnap.data()
                         }
                     })
-                }
+                });
+                this.setState({ currentUser: userAuth })
             }
-            this.setState({ currentUser: userAuth })
         })
     }
 
     componentWillUnmount() {
+        this.unsubscribeOnSnapshot();
         this.unSubscribribeFromAuth();
     }
 
