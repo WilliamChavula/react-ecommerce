@@ -17,7 +17,6 @@ import './App.css'
 class App extends Component {
 
     unSubscribribeFromAuth = null
-    unsubscribeOnSnapshot = null
 
     componentDidMount() {
         const { setCurrentUser } = this.props
@@ -26,7 +25,7 @@ class App extends Component {
             if (userAuth) {
                 const userRef = await createUserProfileDocument(userAuth)
 
-                this.unsubscribeOnSnapshot = onSnapshot(userRef, (documentSnap) => {
+                onSnapshot(userRef, (documentSnap) => {
                     setCurrentUser({
                         id: documentSnap.id,
                         ...documentSnap.data()
