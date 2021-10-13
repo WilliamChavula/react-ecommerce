@@ -24,6 +24,7 @@ class SignInComponent extends Component {
             await signInWithEmailAndPassword(auth, email, password)
             this.setState({ email: '', password: ''})
         } catch (e) {
+            // create a component to display to the user what's going on
             console.error(e)
         }
 
