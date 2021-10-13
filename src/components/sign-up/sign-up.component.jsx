@@ -38,6 +38,7 @@ class SignUpComponent extends Component {
                 confirmPassword: ''
             })
         } catch (e) {
+            // create a component to display to the user what's going on
             console.error(e)
         }
 
