@@ -20,7 +20,7 @@ import './App.css'
 
 class App extends Component {
 
-    unSubscribeFromAuth = null
+    unSubscribeFromAuth = () => null
 
     componentDidMount() {
         const { setCurrentUser } = this.props
