@@ -1,8 +1,8 @@
 import { v4 as uuidv4 } from 'uuid';
 
-export const SHOP_DATA = [
-    {
-        id: uuidv4(),
+export const SHOP_DATA = {
+    hats: {
+        id: 1,
         title: 'Hats',
         routeName: 'hats',
         items: [
@@ -62,8 +62,8 @@ export const SHOP_DATA = [
             }
         ]
     },
-    {
-        id: uuidv4(),
+    sneakers: {
+        id: 2,
         title: 'Sneakers',
         routeName: 'sneakers',
         items: [
@@ -117,8 +117,8 @@ export const SHOP_DATA = [
             }
         ]
     },
-    {
-        id: uuidv4(),
+    jackets: {
+        id: 3,
         title: 'Jackets',
         routeName: 'jackets',
         items: [
@@ -154,10 +154,10 @@ export const SHOP_DATA = [
             }
         ]
     },
-    {
-        id: uuidv4(),
-        title: 'Womens',
-        routeName: 'womens',
+    women: {
+        id: 4,
+        title: 'Women',
+        routeName: 'women',
         items: [
             {
                 id: uuidv4(),
@@ -203,10 +203,10 @@ export const SHOP_DATA = [
             }
         ]
     },
-    {
-        id: uuidv4(),
-        title: 'Mens',
-        routeName: 'mens',
+    men: {
+        id: 5,
+        title: 'Men',
+        routeName: 'men',
         items: [
             {
                 id: uuidv4(),
@@ -246,4 +246,4 @@ export const SHOP_DATA = [
             }
         ]
     }
-];
+};

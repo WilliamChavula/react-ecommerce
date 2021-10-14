@@ -20,12 +20,12 @@ import './App.css'
 
 class App extends Component {
 
-    unSubscribribeFromAuth = null
+    unSubscribeFromAuth = null
 
     componentDidMount() {
         const { setCurrentUser } = this.props
 
-        this.unSubscribribeFromAuth = auth.onAuthStateChanged(async userAuth => {
+        this.unSubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
             if (userAuth) {
                 const userRef = await createUserProfileDocument(userAuth)
 
@@ -41,7 +41,7 @@ class App extends Component {
     }
 
     componentWillUnmount() {
-        this.unSubscribribeFromAuth();
+        this.unSubscribeFromAuth();
     }
 
     render() {
