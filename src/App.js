@@ -1,6 +1,7 @@
 import {Component} from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { onSnapshot } from "firebase/firestore";
+import { onAuthStateChanged } from "firebase/auth";
 import { connect } from "react-redux";
 import {createStructuredSelector} from "reselect";
 
@@ -24,8 +25,7 @@ class App extends Component {
 
     componentDidMount() {
         const { setCurrentUser } = this.props
-
-        this.unSubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
+        this.unSubscribeFromAuth = onAuthStateChanged(auth, async userAuth => {
             if (userAuth) {
                 const userRef = await createUserProfileDocument(userAuth)
 
@@ -35,8 +35,8 @@ class App extends Component {
                         ...documentSnap.data()
                     })
                 });
-                setCurrentUser(userAuth)
             }
+            setCurrentUser(userAuth)
         })
     }
 
@@ -66,7 +66,7 @@ class App extends Component {
     }
 }
 const mapStateToProps = createStructuredSelector({
-  currentUser: selectCurrentUser
+    currentUser: selectCurrentUser
 })
 
 const mapDispatchToProps = dispatch => ({
