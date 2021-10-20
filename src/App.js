@@ -25,10 +25,15 @@ class App extends Component {
 
     componentDidMount() {
         const { setCurrentUser } = this.props
+
+        // listen to auth changes using @function onAuthChanged from firebase
         this.unSubscribeFromAuth = onAuthStateChanged(auth, async userAuth => {
             if (userAuth) {
+
+                // create a new profile in users collection for the authenticated user
                 const userRef = await createUserProfileDocument(userAuth)
 
+                // listen to firestore changes using @function onSnapshot and update user profile state
                 onSnapshot(userRef, (documentSnap) => {
                     setCurrentUser({
                         id: documentSnap.id,
@@ -41,6 +46,7 @@ class App extends Component {
     }
 
     componentWillUnmount() {
+        // unsubscribe from the auth listener
         this.unSubscribeFromAuth();
     }
 

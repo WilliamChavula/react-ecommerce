@@ -9,11 +9,19 @@ import { firebaseConfig } from "./firebase.config";
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
+// get a reference to the database using @function getFirestore
 export const db = getFirestore()
+
+// get a reference to the auth object using the @function getAuth
 export const auth = getAuth()
 
+// get a google authentication provider for google-sign-in
 const provider = new GoogleAuthProvider()
+
+// configure sign-in with google
 provider.setCustomParameters({ prompt: 'select_account'})
+
+// configure sign-in with google to use a popup window
 export const signInWithGoogle = () => signInWithPopup(auth, provider)
 
 
@@ -24,14 +32,19 @@ export const signInWithGoogle = () => signInWithPopup(auth, provider)
 export const createUserProfileDocument = async (userAuth, additionalData) => {
     if(!userAuth) return
 
+    // get a document reference using @function docs
     const userRef = doc(db, "users", userAuth.uid)
+
+    // get a document snapshot using @function getDoc
     const userSnapshot = await getDoc(userRef)
 
+    // check if the snapshot exists
     if(!userSnapshot.exists()) {
         const { displayName, email } = userAuth
         const createdAt = new Date()
 
         try {
+            // set the document in firebase using @function setDocs
             await setDoc(userRef, {
                 displayName,
                 email,
@@ -47,6 +60,8 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
 }
 
 export const addCollectionsAndDocuments = async (collectionKey, objectsToAdd) => {
+
+    // get a collection reference using the @function collection from firebase
     const collectionRef = collection(db, collectionKey)
 
     const batch = writeBatch(db)
