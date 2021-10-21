@@ -64,13 +64,17 @@ export const addCollectionsAndDocuments = async (collectionKey, objectsToAdd) =>
     // get a collection reference using the @function collection from firebase
     const collectionRef = collection(db, collectionKey)
 
+    //  execute multiple write operations as a single batch
     const batch = writeBatch(db)
 
+    // execute multiple write operations to firestore using @function set method
     objectsToAdd.forEach(obj => {
         const newDocRef = doc(collectionRef)
         batch.set(newDocRef, obj)
     })
 
+    // A batch of writes completes atomically and can write to multiple documents.
+    // execute batch commit
     return await batch.commit()
 }
 
