@@ -1,6 +1,6 @@
 import { initializeApp } from 'firebase/app';
 
-import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged } from "firebase/auth";
 import { getFirestore, doc, getDoc, setDoc, collection, writeBatch } from "firebase/firestore";
 
 import { firebaseConfig } from "./firebase.config";
@@ -94,6 +94,18 @@ export const convertCollectionsSnapshotToMap = collection => {
        accumulator[collection.title.toLowerCase()] = collection
        return accumulator
    }, {})
+}
+
+// creates a listener that returns a promise.
+// The promise resolves with an auth object from firebase
+// the auth object is null if user is not authenticated or with user info if authenticated
+export const getCurrentUser = () => {
+  return new Promise((resolve, reject) => {
+      const unsubscribe = onAuthStateChanged(auth, userAuth => {
+          unsubscribe()
+          resolve(userAuth)
+      }, reject)
+  })
 }
 
 export default app
