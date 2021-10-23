@@ -16,7 +16,7 @@ export const db = getFirestore()
 export const auth = getAuth()
 
 // get a google authentication provider for google-sign-in
-const provider = new GoogleAuthProvider()
+export const provider = new GoogleAuthProvider()
 
 // configure sign-in with google
 provider.setCustomParameters({ prompt: 'select_account'})
