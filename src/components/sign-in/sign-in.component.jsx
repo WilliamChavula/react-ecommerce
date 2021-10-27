@@ -5,7 +5,8 @@ import { googleSIgnInStart, emailSIgnInStart } from "../../redux/user/user.actio
 import FormInputComponent from "../form-input/form-input.component";
 import CustomButtonComponent from "../custom-buttom/custom-button.component";
 
-import './sign-in.styles.scss'
+import {SignInButtonsContainer, SignInContainer, Title} from "./sign-in.styles";
+
 
 class SignInComponent extends Component {
     state = {
@@ -30,8 +31,8 @@ class SignInComponent extends Component {
     render() {
         const { googleSIgnInStart } = this.props
         return (
-            <div className='sign-in'>
-                <h2>I already have an account</h2>
+            <SignInContainer>
+                <Title>I already have an account</Title>
                 <span>Sign in with your email and password</span>
                 <form onSubmit={ this.handleSubmit }>
                     <FormInputComponent
@@ -49,14 +50,14 @@ class SignInComponent extends Component {
                         handleChange={this.handleChange}
                         required
                     />
-                    <div className="buttons">
+                    <SignInButtonsContainer>
                         <CustomButtonComponent type="submit"> Sign in </CustomButtonComponent>
                         <CustomButtonComponent type='button' onClick={googleSIgnInStart} isGoogleSignIn>
                             Sign in with Google
                         </CustomButtonComponent>
-                    </div>
+                    </SignInButtonsContainer>
                 </form>
-            </div>
+            </SignInContainer>
         );
     }
 }
