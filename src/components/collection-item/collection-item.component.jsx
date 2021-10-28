@@ -12,7 +12,7 @@ const CollectionItemComponent = ({ item, addItem }) => {
     return (
         <CollectionItemContainer>
             <Image backgroundImage={imageUrl}/>
-            <Footer className="collection-footer">
+            <Footer>
                 <CollectionItemName>{name}</CollectionItemName>
                 <CollectionItemPrice>${price}</CollectionItemPrice>
             </Footer>
