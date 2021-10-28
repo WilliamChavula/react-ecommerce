@@ -12,6 +12,10 @@ export const CheckoutItemContainer = styled.div`
     padding: 15px 0;
     font-size: 20px;
     align-items: center;
+    
+    @media (max-width: 768px) {
+        font-size: 14px;
+    }
 `;
 
 export const ImageContainer = styled.div`
@@ -39,11 +43,17 @@ export const CartItemQuantity = styled.span`
     & span {
       margin: 0 10px;
       user-select: none;
+      
     }
     
     & div {
         cursor: pointer;
         user-select: none;
+        
+        @media (max-width: 768px) {
+            transform: rotate(-90deg);
+            font-size: 14px;
+          }
     }
 `;
 

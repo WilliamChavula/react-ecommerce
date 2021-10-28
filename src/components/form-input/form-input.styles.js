@@ -31,6 +31,10 @@ export const FormInputLabel = styled.label`
     transition: 300ms ease all;
     
     ${props => props.value.length ? mixin : ''}
+    
+    @media (max-width: 768px) {
+        font-size: 14px;
+    }
 `;
 
 export const FormInput = styled.input`
@@ -51,6 +55,10 @@ export const FormInput = styled.input`
     
     &:focus ~ ${FormInputLabel} {
         ${mixin}
+    }
+    
+    @media (max-width: 768px) {
+        font-size: 14px;
     }
     
     

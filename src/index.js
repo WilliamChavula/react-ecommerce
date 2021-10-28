@@ -8,12 +8,14 @@ import {store, persistor } from './redux/store'
 
 import App from './App';
 
-import './index.css'
+import {GlobalStyles} from "./global.styles";
+
 
 ReactDOM.render(
     <Provider store={store}>
         <BrowserRouter>
             <PersistGate persistor={persistor}>
+                <GlobalStyles />
                 <App />
             </PersistGate>
         </BrowserRouter>

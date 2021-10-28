@@ -63,5 +63,9 @@ export const MenuItemContainer = styled.div`
             opacity: 0.9;
         }
     }
+    
+    @media (max-width: 768px) {
+        height: 200px;
+    }
 `;
 

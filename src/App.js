@@ -12,8 +12,6 @@ import AuthenticationPageComponent from "./pages/authentication-page/authenticat
 import { selectCurrentUser } from './redux/user/user.selectors'
 import {checkUserSession} from "./redux/user/user.actions";
 
-import './App.css'
-
 class App extends Component {
 
     componentDidMount() {

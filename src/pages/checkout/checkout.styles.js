@@ -8,6 +8,10 @@ export const CheckoutPageContainer = styled.div`
     flex-direction: column;
     align-items: center;
     margin: 50px auto 0;
+    
+    @media (max-width: 768px) {
+        width: 95%;
+    }
 `;
 
 export const HeaderContainer = styled.div`
@@ -31,6 +35,10 @@ export const CheckoutItem = styled.div`
     margin-top: 30px;
     margin-left: auto;
     font-size: 36px;
+    
+    @media (max-width: 768px) {
+        font-size: 24px;
+    }
 `;
 
 export const CardText = styled.div`
